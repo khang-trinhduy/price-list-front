@@ -11,13 +11,21 @@ import { MatButtonModule } from "@angular/material/button";
 import { FormComponent } from "./cost/form/form.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
-import { ResultComponent } from './cost/result/result.component';
-import { BorrowComponent } from './cost/borrow/borrow.component';
-import { GiftComponent } from './cost/gift/gift.component';
-import { MatIconModule, MatIcon } from "@angular/material/icon";
+import { ResultComponent } from "./cost/result/result.component";
+import { BorrowComponent } from "./cost/borrow/borrow.component";
+import { GiftComponent } from "./cost/gift/gift.component";
+import { MatIconModule } from "@angular/material/icon";
+import { NgxMaskModule, IConfig } from "ngx-mask";
 
+export var options: Partial<IConfig> | (() => Partial<IConfig>);
 @NgModule({
-  declarations: [AppComponent, FormComponent, ResultComponent, BorrowComponent, GiftComponent],
+  declarations: [
+    AppComponent,
+    FormComponent,
+    ResultComponent,
+    BorrowComponent,
+    GiftComponent
+  ],
   imports: [
     MatSelectModule,
     MatTabsModule,
@@ -29,10 +37,10 @@ import { MatIconModule, MatIcon } from "@angular/material/icon";
     HttpClientModule,
     MatInputModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    NgxMaskModule.forRoot(options)
   ],
-  providers: [
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

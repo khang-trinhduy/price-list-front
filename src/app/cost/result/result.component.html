@@ -2,38 +2,38 @@
   <table class="table-result">
     <tbody>
       <tr>
-        <td>Giá xe niêm yết</td>
+        <td>Giá xe xuất hóa đơn</td>
         <td>{{ format(price.price) }}</td>
       </tr>
       <tr>
-        <td>Phí trước Bạ</td>
+        <td>Lệ phí trước Bạ</td>
         <td>{{ format(price.prepaidFee) }}</td>
       </tr>
       <tr>
-        <td>Chi phí đăng ký biển số xe</td>
+        <td>Phí đăng ký biển số xe</td>
         <td>{{ format(price.licenseFee) }}</td>
       </tr>
       <tr>
-        <td>Chi phí đăng kiểm</td>
+        <td>Đăng kiểm</td>
         <td>{{ format(price.registryFee) }}</td>
       </tr>
       <tr>
-        <td>Chi phí</td>
-        <td>{{ format(price.price) }}</td>
+        <td>Phí đường bộ 12 tháng</td>
+        <td>{{ format(price.transitInsuranceFee) }}</td>
       </tr>
       <tr>
         <td>Bảo hiểm dân sự</td>
         <td>{{ format(price.publicInsuranceFee) }}</td>
       </tr>
       <tr>
-        <td>Bảo hiểm thân vỏ</td>
+        <td>Bảo hiểm thân vỏ (tạm tính)</td>
         <td>{{ format(price.carInsuranceFee) }}</td>
       </tr>
       <tr>
-        <td>Chi phí đăng ký xe</td>
+        <td>Dịch vụ đăng ký xe (tùy chọn)</td>
         <td>{{ format(price.carRetristrationFee) }}</td>
       </tr>
     </tbody>
   </table>
-  <h3 class="total-line">Tổng cộng: {{ format(price.total) }}</h3>
+  <h3 class="total-line">Tổng chi phí lăn bánh: {{ format(price.total) }}</h3>
 </div>

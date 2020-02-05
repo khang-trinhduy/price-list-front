@@ -8,21 +8,63 @@ import { Price } from "src/app/models/price";
 })
 export class BorrowComponent implements OnInit {
   @Input() price: Price;
+  percent: number = 7;
+  max;
+  pay;
+  result;
   constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   format(number): String {
     return number.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + " VNĐ";
   }
 
-  borrow(): String {
-    return this.format((parseInt(this.price.price.toString()) * 7) / 10);
+  borrow() {
+    this.max = (parseInt(this.price.price.toString()) * this.percent) / 10;
+    return this.max;
   }
 
-  pay(): String {
-    let left = (parseInt(this.price.price.toString()) * 7) / 10;
-    return this.format(parseInt(this.price.total.toString()) - left);
+  paid() {
+    let left = (parseInt(this.price.price.toString()) * this.percent) / 10;
+    this.pay = parseInt(this.price.total.toString()) - left;
+    return this.pay;
+  }
+
+  update(have, year) {
+    have = have
+      .toString()
+      .split(".")
+      .join("");
+    let borrow = (
+      parseInt(this.price.total.toString()) - have
+    ).toString();
+    if (borrow <= this.max) {
+      this.calculate(borrow, year);
+    } else {
+
+    }
+    let moneyInput = document.querySelector(".money-input");
+    (<HTMLInputElement>moneyInput).value = this.format(borrow).toString();
+  }
+
+  calculate(money, year) {
+    money = money
+      .toString()
+      .split(".")
+      .join("");
+    if (money > this.max) {
+      let moneyInput = document.querySelector(".money-input");
+      (<HTMLInputElement>moneyInput).value = this.max;
+      money = this.max;
+    }
+    let moneyInput = document.querySelector(".have-input");
+    (<HTMLInputElement>moneyInput).value = this.format(parseInt(this.price.total.toString()) - money).toString();
+    if (year >= 1 && year <= 5) {
+      if (money <= this.max && money >= 20000000) {
+        var tmp = money / (year * 12);
+        this.result = parseInt(tmp.toString());
+      }
+    }
   }
 }

@@ -2,20 +2,68 @@
   <table class="table-result">
     <tbody>
       <tr>
-        <td>Giá xe niêm yết</td>
+        <td>Giá xe xuất hóa đơn</td>
         <td>{{ format(price.price) }}</td>
       </tr>
       <tr>
-        <td>Sô tiền được vay (70% của giá xe niêm yết)</td>
-        <td>{{ borrow() }}</td>
+        <td>Sô tiền được vay (70% của giá xe xuất hóa đơn)</td>
+        <td>{{ format(borrow()) }}</td>
       </tr>
       <tr>
         <td>
-          Sô tiền phải trả trước (30% của giá xe niêm yết + các khoản chi phí
-          nêu trên)
+          Sô tiền phải trả trước (30% của giá xe xuất hóa đơn + các khoản chi
+          phí nêu trên)
         </td>
-        <td>{{ pay() }}</td>
+        <td>{{ format(paid()) }}</td>
       </tr>
     </tbody>
   </table>
+  <div class="other-area">
+    <h3 class="borrow-header">Số tiền vốn tự có</h3>
+    <mat-form-field>
+      <input
+        class="have-input"
+        matInput
+        #have
+        placeholder="VNĐ"
+        (change)="update(have.value, year.value)"
+        mask="separator"
+        thousandSeparator="."
+        value=""
+      />
+    </mat-form-field>
+    <h3 class="borrow-header">Số tiền vay ngân hàng</h3>
+    <mat-form-field>
+      <input
+        class="money-input"
+        matInput
+        #pay
+        placeholder="VNĐ"
+        (keyup)="calculate(pay.value, year.value)"
+        (change)="calculate(pay.value, year.value)"
+        mask="separator"
+        thousandSeparator="."
+        [max]="max"
+        [value]=""
+      />
+    </mat-form-field>
+
+    <h3 class="borrow-header">Thời gian vay</h3>
+    <mat-form-field>
+      <input
+        (change)="calculate(pay.value, year.value)"
+        class="year-input"
+        matInput
+        #year
+        placeholder="năm"
+        min="1"
+        max="5"
+        type="number"
+        value="5"
+      />
+    </mat-form-field>
+    <p class="result-line" *ngIf="result">
+      Số tiền phải trả hằng tháng: {{ format(result) }}
+    </p>
+  </div>
 </div>
