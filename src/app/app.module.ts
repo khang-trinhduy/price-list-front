@@ -17,7 +17,7 @@ import { GiftComponent } from "./cost/gift/gift.component";
 import { MatIconModule } from "@angular/material/icon";
 import { NgxMaskModule, IConfig } from "ngx-mask";
 
-export var options: Partial<IConfig> | (() => Partial<IConfig>);
+export const options: Partial<any> | (() => Partial<any>) = null;
 @NgModule({
   declarations: [
     AppComponent,
