@@ -53,8 +53,6 @@ export class FormComponent implements OnInit {
     this.form.patchValue({ model: this.car.value.version });
     this.form.patchValue({ color: this.car.value.color });
     this.form.patchValue({ car: this.car.value.name });
-    if (this.form.valid) {
-      this.service.post(this.form.value).subscribe(res => (this.result = res));
-    }
+    this.service.post(this.form.value).subscribe(res => (this.result = res));
   }
 }
