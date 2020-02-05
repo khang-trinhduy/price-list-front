@@ -12,7 +12,7 @@ export class BorrowComponent implements OnInit {
 
   ngOnInit() {}
 
-  format(number: Number): String {
+  format(number: number): String {
     return number.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + " VNĐ";
   }
 }
