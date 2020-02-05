@@ -11,8 +11,6 @@ export class BorrowComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    var left = (parseInt(this.price.price.toString()) * 7) / 10;
-    var right = parseInt(this.price.total.toString()) - left;
   }
 
   format(number): String {

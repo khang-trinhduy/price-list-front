@@ -13,9 +13,11 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { ResultComponent } from './cost/result/result.component';
 import { BorrowComponent } from './cost/borrow/borrow.component';
+import { GiftComponent } from './cost/gift/gift.component';
+import { MatIconModule, MatIcon } from "@angular/material/icon";
 
 @NgModule({
-  declarations: [AppComponent, FormComponent, ResultComponent, BorrowComponent],
+  declarations: [AppComponent, FormComponent, ResultComponent, BorrowComponent, GiftComponent],
   imports: [
     MatSelectModule,
     MatTabsModule,
@@ -26,7 +28,8 @@ import { BorrowComponent } from './cost/borrow/borrow.component';
     ReactiveFormsModule,
     HttpClientModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [
   ],

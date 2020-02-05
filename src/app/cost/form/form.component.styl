@@ -1,13 +1,38 @@
 :host
   width: 100%
   position: absolute
-  margin-left:15%
 mat-form-field
   width: 100%
 .container
   width: 70%
   line-height: 30px
-  margin: 3vh 0 0
+  margin-left:15%
   padding: 1.5vh 1vh 0.5vh
 .result-container
   margin: 1vh 0 0
+.gift-btn
+  position: fixed
+  width: 100px
+  height: 100px
+  text-align: center
+  border-radius: 50%
+  background-color: #8e8e8e
+  color: white
+  display: flex
+  flex-flow: column
+  justify-content: center
+  transition: background-color 0.5s
+  z-index: 10
+  bottom: 2vh
+  right: 2vh
+  opacity: 0.5
+.gift-btn:hover
+  cursor:pointer
+  background-color: #d4d3d3
+#gift-dialog
+  border: unset
+  width: auto
+  max-width: 750px
+  font-family: initial
+  border-radius: 14px
+  -webkit-transition: all 0.3s

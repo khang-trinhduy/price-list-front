@@ -27,6 +27,22 @@ export class FormComponent implements OnInit {
   ngOnInit() {
     this.service.getProvinces().subscribe(e => (this.provinces = e));
     this.service.getCars().subscribe(e => (this.cars = e));
+    window.addEventListener("load", () => {
+      let btn = document.querySelector(".gift-btn");
+      let dialog = document.querySelector("#gift-dialog");
+      let close = document.querySelector(".icon-area");
+      close.addEventListener("click", () => {
+        (<HTMLDialogElement>dialog).close();
+      });
+      btn.addEventListener("click", () => {
+        (<HTMLDialogElement>dialog).showModal();
+      });
+      window.addEventListener("click", event => {
+        if ((<HTMLElement>event.target).id === "gift-dialog") {
+          (<HTMLDialogElement>dialog).close();
+        }
+      });
+    });
   }
 
   get car() {
@@ -38,7 +54,7 @@ export class FormComponent implements OnInit {
     this.form.patchValue({ color: this.car.value.color });
     this.form.patchValue({ car: this.car.value.name });
     console.log(this.form.value);
-    
-    this.service.post(this.form.value).subscribe(res => this.result = res);
+
+    this.service.post(this.form.value).subscribe(res => (this.result = res));
   }
 }
