@@ -16,6 +16,7 @@ export class FormComponent implements OnInit {
   ) {}
   result: Price;
   provinces: Province[];
+  percent;
   cars: Car[];
   form = this.formBuilder.group({
     contact: [""],
@@ -53,6 +54,11 @@ export class FormComponent implements OnInit {
     this.form.patchValue({ model: this.car.value.version });
     this.form.patchValue({ color: this.car.value.color });
     this.form.patchValue({ car: this.car.value.name });
-    this.service.post(this.form.value).subscribe(res => (this.result = res));
+    this.service.post(this.form.value).subscribe(res => {
+      this.result = res;
+      this.percent =
+        parseInt(this.result.prepaidFee.toString()) /
+        (parseInt(this.result.price.toString()) / 100);
+    });
   }
 }

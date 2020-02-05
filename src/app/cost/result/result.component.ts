@@ -9,9 +9,11 @@ import { PriceService } from "src/app/services/price.service";
 })
 export class ResultComponent implements OnInit {
   @Input() price: Price;
+  @Input() percent;
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   format(number): String {
     return number.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + " VNĐ";
