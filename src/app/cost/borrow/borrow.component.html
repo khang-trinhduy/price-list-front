@@ -1,0 +1,21 @@
+<div class="container" *ngIf="price">
+  <table class="table-result">
+    <tbody>
+      <tr>
+        <td>Giá xe niêm yết</td>
+        <td>{{ format(price.price) }}</td>
+      </tr>
+      <tr>
+        <td>Sô tiền được vay (70% của giá xe niêm yết)</td>
+        <td>{{ format((price.price * 7) / 10) }}</td>
+      </tr>
+      <tr>
+        <td>
+          Sô tiền phải trả trước (30% của giá xe niêm yết + các khoản chi phí
+          nêu trên)
+        </td>
+        <td>{{ format(price.total - (price.price * 7) / 10) }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

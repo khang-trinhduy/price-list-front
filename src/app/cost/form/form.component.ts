@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { PriceService } from "src/app/services/price.service";
 import { Observable } from "rxjs";
-import { Province, Car } from "src/app/models/price";
+import { Province, Car, Price } from "src/app/models/price";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 @Component({
@@ -14,10 +14,11 @@ export class FormComponent implements OnInit {
     private service: PriceService,
     private formBuilder: FormBuilder
   ) {}
+  result: Price;
   provinces: Province[];
   cars: Car[];
   form = this.formBuilder.group({
-    contact: ["", Validators.required],
+    contact: [""],
     car: ["", Validators.required],
     color: ["", Validators.required],
     model: ["", Validators.required],
@@ -38,6 +39,6 @@ export class FormComponent implements OnInit {
     this.form.patchValue({ car: this.car.value.name });
     console.log(this.form.value);
     
-    this.service.post(this.form.value).subscribe(res => console.log(res));
+    this.service.post(this.form.value).subscribe(res => this.result = res);
   }
 }

@@ -1,5 +1,5 @@
 import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
+import { NgModule, LOCALE_ID } from "@angular/core";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -11,9 +11,11 @@ import { MatButtonModule } from "@angular/material/button";
 import { FormComponent } from "./cost/form/form.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
+import { ResultComponent } from './cost/result/result.component';
+import { BorrowComponent } from './cost/borrow/borrow.component';
 
 @NgModule({
-  declarations: [AppComponent, FormComponent],
+  declarations: [AppComponent, FormComponent, ResultComponent, BorrowComponent],
   imports: [
     MatSelectModule,
     MatTabsModule,
@@ -26,7 +28,8 @@ import { HttpClientModule } from "@angular/common/http";
     MatInputModule,
     MatButtonModule
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

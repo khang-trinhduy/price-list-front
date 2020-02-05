@@ -1,29 +1,50 @@
-<form enctype="multipart/form-data" [formGroup]="form" (ngSubmit)="onSubmit()">
-  <h4>Tỉnh thành</h4>
-  <mat-form-field>
-    <mat-select formControlName="province">
-      <mat-option *ngFor="let province of provinces" [value]="province.name">{{
-        province.name
-      }}</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <h4>Loại xe</h4>
-  <mat-form-field>
-    <mat-select formControlName="car">
-      <mat-option *ngFor="let car of cars" [value]="car"
-        >{{ car.name }}-{{ car.version }}-{{ car.color }}</mat-option
-      >
-    </mat-select>
-  </mat-form-field>
-  <h4>Thông tin khách hàng</h4>
-  <mat-form-field class="example-full-width">
-    <input
-      matInput
-      placeholder="Tên khách hàng"
-      formControlName="contact"
-      value=""
-    />
-  </mat-form-field>
-  <div></div>
-  <button color="primary" mat-raised-button>Xem kết quả</button>
-</form>
+<div class="container">
+  <div class="form-container">
+    <h1>Bảng giá các loại xe VINFAST</h1>
+    <form
+      enctype="multipart/form-data"
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()"
+    >
+      <h4>Tỉnh thành</h4>
+      <mat-form-field>
+        <mat-select formControlName="province">
+          <mat-option
+            *ngFor="let province of provinces"
+            [value]="province.name"
+            >{{ province.name }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+      <h4>Loại xe</h4>
+      <mat-form-field>
+        <mat-select formControlName="car">
+          <mat-option *ngFor="let car of cars" [value]="car">{{
+            car.display
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <h4>Thông tin khách hàng <i>(không bắt buộc)</i></h4>
+      <mat-form-field class="example-full-width">
+        <input
+          matInput
+          placeholder="Tên khách hàng"
+          formControlName="contact"
+          value=""
+        />
+      </mat-form-field>
+      <div></div>
+      <button color="primary" mat-raised-button>Xem kết quả</button>
+    </form>
+  </div>
+  <div class="result-container">
+    <mat-tab-group *ngIf="result">
+      <mat-tab label="Thanh toán toàn bộ">
+        <app-result [price]="result"></app-result>
+      </mat-tab>
+      <mat-tab label="Trả góp">
+        <app-borrow [price]="result"></app-borrow>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

@@ -25,4 +25,5 @@ export interface Car {
   color: String;
   version: String;
   price: Number;
+  display: String;
 }

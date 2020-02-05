@@ -1,0 +1,39 @@
+<div class="container" *ngIf="price">
+  <table class="table-result">
+    <tbody>
+      <tr>
+        <td>Giá xe niêm yết</td>
+        <td>{{ format(price.price) }}</td>
+      </tr>
+      <tr>
+        <td>Phí trước Bạ</td>
+        <td>{{ format(price.prepaidFee) }}</td>
+      </tr>
+      <tr>
+        <td>Chi phí đăng ký biển số xe</td>
+        <td>{{ format(price.licenseFee) }}</td>
+      </tr>
+      <tr>
+        <td>Chi phí đăng kiểm</td>
+        <td>{{ format(price.registryFee) }}</td>
+      </tr>
+      <tr>
+        <td>Chi phí</td>
+        <td>{{ format(price.price) }}</td>
+      </tr>
+      <tr>
+        <td>Bảo hiểm dân sự</td>
+        <td>{{ format(price.publicInsuranceFee) }}</td>
+      </tr>
+      <tr>
+        <td>Bảo hiểm thân vỏ</td>
+        <td>{{ format(price.carInsuranceFee) }}</td>
+      </tr>
+      <tr>
+        <td>Chi phí đăng ký xe</td>
+        <td>{{ format(price.carRetristrationFee) }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 class="total-line">Tổng cộng: {{ format(price.total) }}</h3>
+</div>
