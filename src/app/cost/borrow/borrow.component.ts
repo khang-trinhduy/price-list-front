@@ -10,9 +10,21 @@ export class BorrowComponent implements OnInit {
   @Input() price: Price;
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    var left = (parseInt(this.price.price.toString()) * 7) / 10;
+    var right = parseInt(this.price.total.toString()) - left;
+  }
 
   format(number): String {
     return number.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + " VNĐ";
+  }
+
+  borrow(): String {
+    return this.format((parseInt(this.price.price.toString()) * 7) / 10);
+  }
+
+  pay(): String {
+    let left = (parseInt(this.price.price.toString()) * 7) / 10;
+    return this.format(parseInt(this.price.total.toString()) - left);
   }
 }
