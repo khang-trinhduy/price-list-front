@@ -6,7 +6,7 @@
         <td>{{ format(price.price) }}</td>
       </tr>
       <tr>
-        <td>Lệ phí trước Bạ ({{percent}}%)</td>
+        <td>Lệ phí trước Bạ ({{ percent }}%)</td>
         <td>{{ format(price.prepaidFee) }}</td>
       </tr>
       <tr>
@@ -33,7 +33,25 @@
         <td>Dịch vụ đăng ký xe (tùy chọn)</td>
         <td>{{ format(price.carRetristrationFee) }}</td>
       </tr>
+      <tr *ngIf="fadil">
+        <td>Ưu đãi khi thanh toán toàn bộ chi phí (10% giá trị xe)</td>
+        <td class="gift-line">{{ format(getGift()) }}</td>
+      </tr>
     </tbody>
   </table>
+  <mat-form-field>
+    <mat-label>
+      Khuyến mại:
+    </mat-label>
+    <input
+      matInput
+      mask="separator"
+      thousandSeparator="."
+      placeholder="VNĐ"
+      #gift
+      (keyup)="update(gift.value)"
+    />
+  </mat-form-field>
   <h3 class="total-line">Tổng chi phí lăn bánh: {{ format(price.total) }}</h3>
+  <h3 class="final-line">Tổng chi phí lăn bánh sau ưu đãi và khuyến mại (nếu có): {{ format(final) }}</h3>
 </div>

@@ -40,7 +40,7 @@
   <div class="result-container">
     <mat-tab-group *ngIf="result">
       <mat-tab label="Thanh toán toàn bộ">
-        <app-result [percent]="percent" [price]="result"></app-result>
+        <app-result [final]="final()" [car]="this.carName" [percent]="percent" [price]="result"></app-result>
       </mat-tab>
       <mat-tab label="Trả góp">
         <app-borrow [price]="result"></app-borrow>

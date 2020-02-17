@@ -14,6 +14,7 @@ export class FormComponent implements OnInit {
     private service: PriceService,
     private formBuilder: FormBuilder
   ) {}
+  carName;
   result: Price;
   provinces: Province[];
   percent;
@@ -51,6 +52,7 @@ export class FormComponent implements OnInit {
   }
 
   onSubmit() {
+    this.carName = this.car.value.name;
     this.form.patchValue({ model: this.car.value.version });
     this.form.patchValue({ color: this.car.value.color });
     this.form.patchValue({ car: this.car.value.name });
@@ -60,5 +62,14 @@ export class FormComponent implements OnInit {
         parseInt(this.result.prepaidFee.toString()) /
         (parseInt(this.result.price.toString()) / 100);
     });
+  }
+
+  final() {
+    if (this.carName === "FADIL") {
+      return (
+        parseInt(this.result.total.toString()) -
+        parseInt(this.result.price.toString()) / 10
+      );
+    } else return parseInt(this.result.total.toString());
   }
 }
