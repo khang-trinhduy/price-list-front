@@ -18,7 +18,7 @@
       </mat-form-field>
       <h4>Loại xe</h4>
       <mat-form-field>
-        <mat-select formControlName="car">
+        <mat-select formControlName="car" (selectionChange)="update()">
           <mat-option *ngFor="let car of cars" [value]="car">{{
             car.display
           }}</mat-option>

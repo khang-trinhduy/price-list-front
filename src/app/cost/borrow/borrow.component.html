@@ -32,6 +32,19 @@
         value=""
       />
     </mat-form-field>
+    <h3 class="borrow-header">Số tiền khuyến mại</h3>
+    <mat-form-field>
+      <input
+        class="gift-input"
+        matInput
+        #gift
+        placeholder="VNĐ"
+        (keyup)="update(gift.value, year.value)"
+        mask="separator"
+        thousandSeparator="."
+        value=""
+      />
+    </mat-form-field>
     <h3 class="borrow-header">Số tiền vay ngân hàng</h3>
     <mat-form-field>
       <input

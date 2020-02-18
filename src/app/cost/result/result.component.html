@@ -1,4 +1,4 @@
-<div class="container" *ngIf="price">
+<div class="container" *ngIf="price" id="result-table">
   <table class="table-result">
     <tbody>
       <tr>
@@ -26,32 +26,70 @@
         <td>{{ format(price.publicInsuranceFee) }}</td>
       </tr>
       <tr>
-        <td>Bảo hiểm thân vỏ (tạm tính)</td>
-        <td>{{ format(price.carInsuranceFee) }}</td>
-      </tr>
-      <tr>
-        <td>Dịch vụ đăng ký xe (tùy chọn)</td>
+        <td>Dịch vụ đăng ký xe</td>
         <td>{{ format(price.carRetristrationFee) }}</td>
-      </tr>
-      <tr *ngIf="fadil">
-        <td>Ưu đãi khi thanh toán toàn bộ chi phí (10% giá trị xe)</td>
-        <td class="gift-line">{{ format(getGift()) }}</td>
       </tr>
     </tbody>
   </table>
-  <mat-form-field>
-    <mat-label>
-      Khuyến mại:
-    </mat-label>
-    <input
-      matInput
-      mask="separator"
-      thousandSeparator="."
-      placeholder="VNĐ"
-      #gift
-      (keyup)="update(gift.value)"
-    />
-  </mat-form-field>
+  <div class="gift-area">
+    <div class="vin-gift" *ngIf="fadil">
+      <p>
+        Ưu đãi 10% cho dòng xe FADIL: <b>{{ format(getGift()) }}</b>
+      </p>
+      <div class="apply-btn fadil-btn" (click)="apply()">
+        Áp dụng
+      </div>
+    </div>
+    <div class="sale-gift">
+      <mat-form-field>
+        <mat-label>Khuyến mãi</mat-label>
+        <input
+          #gift
+          matInput
+          placeholder="VNĐ"
+          mask="separator"
+          thousandSeparator="."
+        />
+      </mat-form-field>
+      <div class="apply-btn" (click)="addGift(gift.value)">
+        Áp dụng
+      </div>
+    </div>
+    <mat-checkbox (change)="updateInsurance()" [(ngModel)]="insurance"
+      >Mua bảo hiểm thân vỏ: {{ format(price.carInsuranceFee) }}</mat-checkbox
+    >
+  </div>
   <h3 class="total-line">Tổng chi phí lăn bánh: {{ format(price.total) }}</h3>
-  <h3 class="final-line">Tổng chi phí lăn bánh sau ưu đãi và khuyến mại (nếu có): {{ format(final) }}</h3>
+  <div *ngIf="giftline" class="gift-pin">
+    <div class="header-line">{{ giftline }}</div>
+    <div class="gift-icon">
+      <i title="Xóa"
+        ><mat-icon (click)="removeGift()" class="remove-icon"
+          >backspace</mat-icon
+        >
+      </i>
+    </div>
+  </div>
+  <div *ngIf="fadilline" class="fadil-pin">
+    <div class="header-line">{{ fadilline }}</div>
+    <div class="fadil-icon">
+      <i title="Xóa"
+        ><mat-icon (click)="removeFadil()" class="remove-icon"
+          >backspace</mat-icon
+        >
+      </i>
+    </div>
+  </div>
+  <!-- 
+  <app-pin
+    class="gift-pin"
+    *ngIf="gift > 0"
+    [value]="format(gift)"
+    [line]="giftline"
+    unpin="remove($vent)"
+  ></app-pin> -->
+  <!-- <i class="final-line" *ngIf="formula">({{ formula }})</i> -->
+</div>
+<div class="download-btn" (click)="save()">
+  <mat-icon>save</mat-icon><span>Tải xuống</span>
 </div>

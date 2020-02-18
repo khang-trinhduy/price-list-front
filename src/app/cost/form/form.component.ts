@@ -51,6 +51,11 @@ export class FormComponent implements OnInit {
     return this.form.get("car");
   }
 
+  update() {
+    this.result = null;
+    console.log("ok");
+  }
+
   onSubmit() {
     this.carName = this.car.value.name;
     this.form.patchValue({ model: this.car.value.version });

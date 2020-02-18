@@ -16,15 +16,20 @@ import { BorrowComponent } from "./cost/borrow/borrow.component";
 import { GiftComponent } from "./cost/gift/gift.component";
 import { MatIconModule } from "@angular/material/icon";
 import { NgxMaskModule, IConfig } from "ngx-mask";
+import { ExportAsModule } from 'ngx-export-as';
+import { PinComponent } from './cost/pin/pin.component';
+import { MatCheckboxModule } from "@angular/material/checkbox";
 
 export const options: Partial<any> | (() => Partial<any>) = null;
+
 @NgModule({
   declarations: [
     AppComponent,
     FormComponent,
     ResultComponent,
     BorrowComponent,
-    GiftComponent
+    GiftComponent,
+    PinComponent
   ],
   imports: [
     MatSelectModule,
@@ -38,7 +43,8 @@ export const options: Partial<any> | (() => Partial<any>) = null;
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    NgxMaskModule.forRoot(options)
+    NgxMaskModule.forRoot(options),
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]
