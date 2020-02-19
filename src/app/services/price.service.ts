@@ -36,6 +36,24 @@ export class PriceService {
       .pipe(catchError(this.handleError<any>("CREATE PRICE")));
   };
 
+  getPrice = id => {
+    return this.http
+      .get(`${environment.api}/prices/${id}`)
+      .pipe(catchError(this.handleError<any>("GET PRICE")));
+  };
+
+  upload = (form, id): Observable<any> => {
+    return this.http
+      .post(`${environment.api}/prices/${id}/upload`, form)
+      .pipe(catchError(this.handleError<any>("UPLOAD IMG")));
+  };
+
+  update = (form, id): Observable<any> => {
+    return this.http
+      .put(`${environment.api}/prices/${id}`, form)
+      .pipe(catchError(this.handleError<any>("UPDATE PRICE")));
+  };
+
   private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {
       // TODO: send the error to remote logging infrastructure

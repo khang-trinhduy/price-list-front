@@ -80,6 +80,13 @@
       </i>
     </div>
   </div>
+  <h4>Ảnh xe minh họa</h4>
+  <input
+    type="file"
+    name="image"
+    #file
+    accept="image/png,image/jpeg,image/jpg"
+  />
   <!-- 
   <app-pin
     class="gift-pin"
@@ -89,7 +96,12 @@
     unpin="remove($vent)"
   ></app-pin> -->
   <!-- <i class="final-line" *ngIf="formula">({{ formula }})</i> -->
-</div>
-<div class="download-btn" (click)="save()">
-  <mat-icon>save</mat-icon><span>Tải xuống</span>
+  <button
+    [disabled]="file.files.length <= 0"
+    (click)="save(file.files[0])"
+    mat-raised-button
+    color="accent"
+  >
+    Xem kết quả
+  </button>
 </div>

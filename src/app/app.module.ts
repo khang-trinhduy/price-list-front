@@ -19,6 +19,7 @@ import { NgxMaskModule, IConfig } from "ngx-mask";
 import { ExportAsModule } from 'ngx-export-as';
 import { PinComponent } from './cost/pin/pin.component';
 import { MatCheckboxModule } from "@angular/material/checkbox";
+import { PageComponent } from './cost/page/page.component';
 
 export const options: Partial<any> | (() => Partial<any>) = null;
 
@@ -29,7 +30,8 @@ export const options: Partial<any> | (() => Partial<any>) = null;
     ResultComponent,
     BorrowComponent,
     GiftComponent,
-    PinComponent
+    PinComponent,
+    PageComponent
   ],
   imports: [
     MatSelectModule,

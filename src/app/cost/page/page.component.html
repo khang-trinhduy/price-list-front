@@ -1,0 +1,158 @@
+<div *ngIf="result$ | async as result; else loading" class="page-container">
+  <div class="header-area">
+    <div class="img-content">
+      <img [src]="domain + result?.img" alt="" />
+      <div class="header-content">
+        <h1 class="header-line">
+          Vinfast {{ result?.carName }} bản {{ translate(result?.carType) }}
+          {{ result?.province }}
+        </h1>
+      </div>
+    </div>
+  </div>
+  <div class="content-area">
+    <table class="table-result">
+      <tbody>
+        <tr>
+          <td>Giá xe xuất hóa đơn</td>
+          <td>{{ format(result?.price) }}</td>
+        </tr>
+        <tr>
+          <td>
+            Lệ phí trước Bạ ({{ percent(result?.price, result?.prepaidFee) }}%)
+          </td>
+          <td>{{ format(result?.prepaidFee) }}</td>
+        </tr>
+        <tr>
+          <td>Phí đăng ký biển số xe</td>
+          <td>{{ format(result?.licenseFee) }}</td>
+        </tr>
+        <tr>
+          <td>Đăng kiểm</td>
+          <td>{{ format(result?.registryFee) }}</td>
+        </tr>
+        <tr>
+          <td>Phí đường bộ 12 tháng</td>
+          <td>{{ format(result?.transitInsuranceFee) }}</td>
+        </tr>
+        <tr>
+          <td>Bảo hiểm dân sự</td>
+          <td>{{ format(result?.publicInsuranceFee) }}</td>
+        </tr>
+        <tr>
+          <td>Dịch vụ đăng ký xe</td>
+          <td>{{ format(result?.carRetristrationFee) }}</td>
+        </tr>
+        <tr *ngIf="result?.insurance">
+          <td>Bảo hiểm thân vỏ</td>
+          <td>{{ format(result?.carInsuranceFee) }}</td>
+        </tr>
+        <tr class="helper">
+          <td></td>
+          <td></td>
+        </tr>
+        <tr class="summary-line">
+          <td>Tổng cộng các chi phí nêu trên</td>
+          <td #total>
+            {{
+              format(
+                sum(
+                  result?.price +
+                    result?.licenseFee +
+                    result?.registryFee +
+                    result?.transitInsuranceFee +
+                    result?.publicInsuranceFee +
+                    result?.carRetristrationFee +
+                    result?.prepaidFee
+                ) + insurance(result?.insurance, result?.carInsuranceFee)
+              )
+            }}
+          </td>
+        </tr>
+        <tr *ngIf="loan">
+          <td>Số tiền vay ngân hàng (70% tổng chi phí)</td>
+          <td>
+            {{
+              format(
+                getLoan(
+                  sum(
+                    result?.price +
+                      result?.licenseFee +
+                      result?.registryFee +
+                      result?.transitInsuranceFee +
+                      result?.publicInsuranceFee +
+                      result?.carRetristrationFee +
+                      result?.prepaidFee
+                  ) + insurance(result?.insurance, result?.carInsuranceFee)
+                )
+              )
+            }}
+          </td>
+        </tr>
+        <tr *ngIf="loan">
+          <td>Số tiền trả trước (30% tổng chi phí)</td>
+          <td>
+            {{
+              format(
+                getPaid(
+                  sum(
+                    result?.price +
+                      result?.licenseFee +
+                      result?.registryFee +
+                      result?.transitInsuranceFee +
+                      result?.publicInsuranceFee +
+                      result?.carRetristrationFee +
+                      result?.prepaidFee
+                  ) + insurance(result?.insurance, result?.carInsuranceFee)
+                )
+              )
+            }}
+          </td>
+        </tr>
+        <tr *ngIf="result?.benefit && !loan" class="benefit-line">
+          <td>Ưu đãi khi thanh toán toàn bộ</td>
+          <td>{{ format(result?.benefit) }}</td>
+        </tr>
+        <tr *ngIf="result?.gift" class="gift-line">
+          <td>Khuyến mãi từ đại lý</td>
+          <td>{{ format(result?.gift) }}</td>
+        </tr>
+        <tr *ngIf="!loan" class="total-line">
+          <td>Tổng chi phí lăn bánh</td>
+          <td>{{ format(result?.total) }}</td>
+        </tr>
+        <tr *ngIf="loan" class="total-line">
+          <td>Tổng chi phí lăn bánh</td>
+          <td>
+            {{
+              format(
+                getPaid(
+                  sum(
+                    result?.price +
+                      result?.licenseFee +
+                      result?.registryFee +
+                      result?.transitInsuranceFee +
+                      result?.publicInsuranceFee +
+                      result?.carRetristrationFee +
+                      result?.prepaidFee
+                  ) + insurance(result?.insurance, result?.carInsuranceFee)
+                ) - result?.gift
+              )
+            }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="main-area">
+      <div class="fully-area" *ngIf="result?.type === 1">
+        <div class="benefit-area"></div>
+        <div class="total-area"></div>
+      </div>
+      <div class="borrow" *ngIf="result?.type != 1">
+        <div class="loan-area"></div>
+        <div class="unpaid-area"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #loading>loading</ng-template>

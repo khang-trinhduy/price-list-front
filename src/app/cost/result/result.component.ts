@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { Price } from "src/app/models/price";
 import { ExportAsService, ExportAsConfig } from "ngx-export-as";
+import { PriceService } from "src/app/services/price.service";
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: "app-result",
@@ -15,12 +17,12 @@ export class ResultComponent implements OnInit {
   initial;
   formula: string;
   gift: number;
-  checked: boolean = false;
   giftline;
   fadilline;
   insurance = false;
+  benefit = 0;
 
-  constructor() {}
+  constructor(private service: PriceService, private route: Router) {}
 
   exportAsConfig: ExportAsConfig = {
     type: "png", // the type you want to download
@@ -81,7 +83,42 @@ export class ResultComponent implements OnInit {
     }
   }
 
-  save() {}
+  save(file) {
+    // image, final, insurance, gift, price._id
+    var form = new FormData();
+    var reader = new FileReader();
+    form.append("image", file);
+    this.service.upload(form, this.price._id).subscribe(
+      res => {
+        let path = res["file"].path;
+        if (path) {
+          console.log(path);
+          let final = this.convert(this.price.total);
+          var form = {
+            final: final,
+            insurance: this.insurance,
+            gift: this.gift,
+            image: path,
+            benefit: this.benefit
+          };
+          this.service.update(form, this.price._id).subscribe(
+            result => {
+              // console.log(result);
+            },
+            error => {
+              console.log("error happended");
+            },
+            () => {
+              // navigate
+              this.route.navigateByUrl('/result/' + this.price._id);
+            }
+          );
+        }
+      },
+      error => {},
+      () => {}
+    );
+  }
 
   apply() {
     this.setFormula();
@@ -90,8 +127,8 @@ export class ResultComponent implements OnInit {
     this.fadilline = `Ưu đãi ${this.format(
       this.convert(this.price.price) / 10
     )}`;
+    this.benefit = this.convert(this.price.price) / 10;
     this.toggle(true, true);
-    this.checked = true;
   }
 
   addGift(value) {
@@ -162,6 +199,7 @@ export class ResultComponent implements OnInit {
   removeGift() {
     this.price.total = this.convert(this.price.total) + this.gift;
     this.toggle();
+    this.gift = 0;
     this.giftline = "";
   }
 
@@ -169,6 +207,7 @@ export class ResultComponent implements OnInit {
     this.price.total =
       this.convert(this.price.total) + this.convert(this.price.price) / 10;
     this.fadilline = "";
+    this.benefit = 0;
     this.toggle(false, true);
   }
 }
