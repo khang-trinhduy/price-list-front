@@ -24,9 +24,9 @@ export class PageComponent implements OnInit {
     return number.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + " VNĐ";
   }
 
-  getLoan = x => x * 0.7;
+  getLoan = x => parseInt((x * 0.7).toString());
 
-  getPaid = x => x * 0.3;
+  getPaid = x => parseInt((x * 0.3).toString());
 
   sum = x => parseInt(x.toString());
 

@@ -1,0 +1,14 @@
+<div class="recent-container">
+  <div class="recent-header">
+    <h2>Các bảng giá thêm gần đây</h2>
+  </div>
+  <div *ngFor="let item of $recents | async" class="recent-item">
+    <div class="recent-header">
+      {{ item?.carName }} {{ translate(item?.carType) }} {{ item?.province }}
+    </div>
+    <div class="recent-link">
+      <a [href]="'/result/' + item?._id">Trả toàn bộ</a> --
+      <a [href]="'/result/' + item?._id + '?pm=loan'">Trả góp</a>
+    </div>
+  </div>
+</div>

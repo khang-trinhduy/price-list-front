@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from "@angular/core";
 import { Price } from "src/app/models/price";
 import { ExportAsService, ExportAsConfig } from "ngx-export-as";
 import { PriceService } from "src/app/services/price.service";
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: "app-result",
@@ -21,6 +21,7 @@ export class ResultComponent implements OnInit {
   fadilline;
   insurance = false;
   benefit = 0;
+  loan: true | false = false;
 
   constructor(private service: PriceService, private route: Router) {}
 
@@ -103,6 +104,13 @@ export class ResultComponent implements OnInit {
           };
           this.service.update(form, this.price._id).subscribe(
             result => {
+              if (this.loan) {
+                this.route.navigateByUrl("/result/" + this.price._id);
+              } else {
+                this.route.navigateByUrl(
+                  "/result/" + this.price._id + "?pm=loan"
+                );
+              }
               // console.log(result);
             },
             error => {
@@ -110,7 +118,6 @@ export class ResultComponent implements OnInit {
             },
             () => {
               // navigate
-              this.route.navigateByUrl('/result/' + this.price._id);
             }
           );
         }

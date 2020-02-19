@@ -37,6 +37,8 @@
       <button color="primary" mat-raised-button>Tìm kiếm</button>
     </form>
   </div>
+  <app-recent [$recents]="$recents"></app-recent>
+  <a class="recent-link" href="/recents">Các bảng giá thêm gần đây</a>
   <div class="result-container">
     <mat-tab-group *ngIf="result">
       <mat-tab label="Thanh toán toàn bộ">

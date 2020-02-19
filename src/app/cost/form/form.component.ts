@@ -16,6 +16,7 @@ export class FormComponent implements OnInit {
   ) {}
   carName;
   result: Price;
+  $recents: Observable<any[]>;
   provinces: Province[];
   percent;
   cars: Car[];
@@ -27,6 +28,7 @@ export class FormComponent implements OnInit {
     province: ["", Validators.required]
   });
   ngOnInit() {
+    this.$recents = this.service.getPrices(5, 1);
     this.service.getProvinces().subscribe(e => (this.provinces = e));
     this.service.getCars().subscribe(e => (this.cars = e));
     window.addEventListener("load", () => {

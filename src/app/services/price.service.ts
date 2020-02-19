@@ -42,6 +42,14 @@ export class PriceService {
       .pipe(catchError(this.handleError<any>("GET PRICE")));
   };
 
+  getPrices(size, index): Observable<any[]> {
+    return this.http
+      .get(`${environment.api}/prices?pageSize=${size}&pageIndex=${index}`, {
+        headers: this.httpHeaderOptions
+      })
+      .pipe(catchError(this.handleError<any>("GET PRICES")));
+  }
+
   upload = (form, id): Observable<any> => {
     return this.http
       .post(`${environment.api}/prices/${id}/upload`, form)

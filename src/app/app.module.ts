@@ -20,6 +20,8 @@ import { ExportAsModule } from 'ngx-export-as';
 import { PinComponent } from './cost/pin/pin.component';
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { PageComponent } from './cost/page/page.component';
+import { MatRadioModule } from "@angular/material/radio";
+import { RecentComponent } from './cost/recent/recent.component';
 
 export const options: Partial<any> | (() => Partial<any>) = null;
 
@@ -31,7 +33,8 @@ export const options: Partial<any> | (() => Partial<any>) = null;
     BorrowComponent,
     GiftComponent,
     PinComponent,
-    PageComponent
+    PageComponent,
+    RecentComponent
   ],
   imports: [
     MatSelectModule,
@@ -46,7 +49,8 @@ export const options: Partial<any> | (() => Partial<any>) = null;
     MatButtonModule,
     MatIconModule,
     NgxMaskModule.forRoot(options),
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent]

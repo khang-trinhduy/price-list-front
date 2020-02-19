@@ -80,7 +80,7 @@
       </i>
     </div>
   </div>
-  <h4>Ảnh xe minh họa</h4>
+  <h4>Upload ảnh minh họa (tỷ lệ khung hình 7:4, size < 1mb)</h4>
   <input
     type="file"
     name="image"
@@ -96,6 +96,10 @@
     unpin="remove($vent)"
   ></app-pin> -->
   <!-- <i class="final-line" *ngIf="formula">({{ formula }})</i> -->
+  <mat-radio-group [(ngModel)]="loan">
+    <mat-radio-button [value]="false" checked>Trả toàn bộ</mat-radio-button>
+    <mat-radio-button [value]="true">Trả góp</mat-radio-button>
+  </mat-radio-group>
   <button
     [disabled]="file.files.length <= 0"
     (click)="save(file.files[0])"
