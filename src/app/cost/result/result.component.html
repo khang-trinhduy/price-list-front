@@ -80,13 +80,20 @@
       </i>
     </div>
   </div>
-  <h4>Upload ảnh minh họa (tỷ lệ khung hình 7:4, size < 1mb)</h4>
+  <mat-radio-group [(ngModel)]="img">
+    <mat-radio-button [value]="item" *ngFor="let item of links">
+      <div class="radio-container">
+        <img class="radio-img" [src]="domain + '/' + item" alt="" />
+      </div>
+    </mat-radio-button>
+  </mat-radio-group>
+  <!-- <h4>Upload ảnh minh họa (tỷ lệ khung hình 7:4, size < 1mb)</h4>
   <input
     type="file"
     name="image"
     #file
     accept="image/png,image/jpeg,image/jpg"
-  />
+  /> -->
   <!-- 
   <app-pin
     class="gift-pin"
@@ -100,12 +107,7 @@
     <mat-radio-button [value]="false" checked>Trả toàn bộ</mat-radio-button>
     <mat-radio-button [value]="true">Trả góp</mat-radio-button>
   </mat-radio-group>
-  <button
-    [disabled]="file.files.length <= 0"
-    (click)="save(file.files[0])"
-    mat-raised-button
-    color="accent"
-  >
+  <button (click)="save()" mat-raised-button color="accent">
     Xem kết quả
   </button>
 </div>
