@@ -3,6 +3,7 @@ import { Price } from "src/app/models/price";
 import { ExportAsService, ExportAsConfig } from "ngx-export-as";
 import { PriceService } from "src/app/services/price.service";
 import { ActivatedRoute, Router } from "@angular/router";
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: "app-result",
@@ -22,6 +23,24 @@ export class ResultComponent implements OnInit {
   insurance = false;
   benefit = 0;
   loan: true | false = false;
+  domain = environment.api;
+  img = "public/images/fadil-black.png";
+
+  links = [
+    "public/images/fadil-black.png",
+    "public/images/fadil-grey.png",
+    "public/images/fadil-orange.png",
+    "public/images/fadil-red.png",
+    "public/images/fadil-white.png",
+    "public/images/lux-a-black.png",
+    "public/images/lux-a-grey.png",
+    "public/images/lux-a-orange.jpg",
+    "public/images/lux-a-red.png",
+    "public/images/lux-a-white.png",
+    "public/images/lux-sa-black.png",
+    "public/images/lux-sa-red.png",
+    "public/images/lux-sa-white.png"
+  ];
 
   constructor(private service: PriceService, private route: Router) {}
 
@@ -84,47 +103,35 @@ export class ResultComponent implements OnInit {
     }
   }
 
-  save(file) {
+  save() {
     // image, final, insurance, gift, price._id
-    var form = new FormData();
-    var reader = new FileReader();
-    form.append("image", file);
-    this.service.upload(form, this.price._id).subscribe(
-      res => {
-        let path = res["file"].path;
-        if (path) {
-          console.log(path);
-          let final = this.convert(this.price.total);
-          var form = {
-            final: final,
-            insurance: this.insurance,
-            gift: this.gift,
-            image: path,
-            benefit: this.benefit
-          };
-          this.service.update(form, this.price._id).subscribe(
-            result => {
-              if (this.loan) {
-                this.route.navigateByUrl("/result/" + this.price._id);
-              } else {
-                this.route.navigateByUrl(
-                  "/result/" + this.price._id + "?pm=loan"
-                );
-              }
-              // console.log(result);
-            },
-            error => {
-              console.log("error happended");
-            },
-            () => {
-              // navigate
-            }
-          );
+    let path = this.img;
+    if (path) {
+      let final = this.convert(this.price.total);
+      var form = {
+        final: final,
+        insurance: this.insurance,
+        gift: this.gift,
+        image: path,
+      benefit: this.benefit
+      };
+      this.service.update(form, this.price._id).subscribe(
+        result => {
+          if (this.loan) {
+            this.route.navigateByUrl("/result/" + this.price._id);
+          } else {
+            this.route.navigateByUrl("/result/" + this.price._id + "?pm=loan");
+          }
+          // console.log(result);
+        },
+        error => {
+          console.log("error happended");
+        },
+        () => {
+          // navigate
         }
-      },
-      error => {},
-      () => {}
-    );
+      );
+    }
   }
 
   apply() {
