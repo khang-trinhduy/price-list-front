@@ -39,7 +39,7 @@ export class PageComponent implements OnInit {
   percent(a, b) {
     var x = this.convert(a);
     var y = this.convert(b);
-    return x / y;
+    return y / (x / 100);
   }
 
   convert = a => parseInt(a.toString());
