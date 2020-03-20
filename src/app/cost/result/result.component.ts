@@ -117,7 +117,7 @@ export class ResultComponent implements OnInit {
       };
       this.service.update(form, this.price._id).subscribe(
         result => {
-          if (this.loan) {
+          if (!this.loan) {
             this.route.navigateByUrl("/result/" + this.price._id);
           } else {
             this.route.navigateByUrl("/result/" + this.price._id + "?pm=loan");

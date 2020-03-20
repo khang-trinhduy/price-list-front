@@ -104,7 +104,7 @@
   ></app-pin> -->
   <!-- <i class="final-line" *ngIf="formula">({{ formula }})</i> -->
   <mat-radio-group [(ngModel)]="loan">
-    <mat-radio-button [value]="false" checked>Trả toàn bộ</mat-radio-button>
+    <mat-radio-button [value]="false">Trả toàn bộ</mat-radio-button>
     <mat-radio-button [value]="true">Trả góp</mat-radio-button>
   </mat-radio-group>
   <button (click)="save()" mat-raised-button color="accent">

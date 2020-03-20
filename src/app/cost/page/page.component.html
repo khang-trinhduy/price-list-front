@@ -10,6 +10,9 @@
       </div>
     </div>
   </div>
+  <div class="clHde" *ngIf="result?.contact">
+    <h2 class="cLeeX"><i>Anh/Chị:</i> {{ result?.contact }}</h2>
+  </div>
   <div class="content-area">
     <table class="table-result">
       <tbody>
@@ -114,7 +117,7 @@
           <td>{{ format(result?.benefit) }}</td>
         </tr>
         <tr *ngIf="result?.gift" class="gift-line">
-          <td>Khuyến mãi từ đại lý</td>
+          <td>Khuyến mãi riêng từ đại lý</td>
           <td>{{ format(result?.gift) }}</td>
         </tr>
         <tr *ngIf="!loan" class="total-line">
