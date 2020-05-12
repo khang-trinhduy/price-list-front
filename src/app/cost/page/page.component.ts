@@ -50,7 +50,7 @@ export class PageComponent implements OnInit {
         return "tiêu chuẩn";
       } else if (string === "advance") {
         return "nâng cao";
-      } else return "cao cấp";
+      } else return "full";
     }
   }
 }
